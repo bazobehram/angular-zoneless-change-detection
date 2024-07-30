@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.btn-primary {
+  background-color: #3498db;
+  color: white;
+}
+.btn-success {
+  background-color: #2ecc71;
+  color: white;
+}
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}

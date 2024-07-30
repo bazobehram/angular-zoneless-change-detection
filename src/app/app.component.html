@@ -1,0 +1,166 @@
+<div class="container mt-5">
+  <mat-progress-bar mode="buffer"></mat-progress-bar>
+  <nav class="navbar navbar-light header bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <h1>Angular Zoneless Change Detection Demo</h1>
+      </a>
+      <form class="d-flex">
+        <button
+          (click)="changeDetectorRef()"
+          class="btn btn-outline-light"
+          type="button"
+        >
+          Change Detect
+        </button>
+      </form>
+    </div>
+  </nav>
+
+  @if (detectChanges()) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+
+  <div class="row mb-4">
+    <div class="col-md-3 mb-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <app-animated-number-counter
+            (start)="startStandartInterval()"
+            (stop)="stopStandartInterval()"
+            title="Standard Interval"
+            [startNumber]="standartCount"
+            [minNumber]="0"
+            [maxNumber]="99"
+            [step]="1"
+            [showControls]="false"
+          ></app-animated-number-counter>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <app-animated-number-counter
+            (start)="startSignalInterval()"
+            (stop)="stopSignalInterval()"
+            title="Signal Interval"
+            [startNumber]="signalCount()"
+            [minNumber]="0"
+            [maxNumber]="99"
+            [step]="1"
+            [showControls]="false"
+          ></app-animated-number-counter>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <app-animated-number-counter
+            title="Onpush Parent"
+            [startNumber]="displayNumber"
+            [minNumber]="0"
+            [maxNumber]="99"
+            [step]="1"
+            [showControls]="true"
+          ></app-animated-number-counter>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <app-animated-number-counter
+            title="Default Parent"
+            [startNumber]="displayNumber"
+            [minNumber]="0"
+            [maxNumber]="99"
+            [step]="1"
+            [showControls]="true"
+          ></app-animated-number-counter>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-3 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Input Binding</h5>
+          <input
+            class="form-control"
+            [value]="inputValue"
+            (input)="onInput($event)"
+          />
+          <p class="mt-2">Input Value: {{ inputValue }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Promises in Zoneless Mode</h5>
+          <p>Promise Result: {{ promiseResult }}</p>
+          <button class="btn btn-primary" (click)="runPromise()">
+            Run Promise
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <button
+            class="btn btn-secondary mb-3"
+            (click)="callWithoutChangeDetection()"
+          >
+            Call API (without change detection)
+          </button>
+          <ul class="list-unstyled">
+            @for (post of posts; track post) {
+              <li>{{ post.name }}</li>
+            }
+          </ul>
+          <button
+          (click)="changeDetectorRef()"
+          class="btn btn-success"
+          type="button"
+        >
+          Change Detect
+        </button>
+        </div>
+      </div>
+      @if (posts.length !== 0) {
+        <button (click)="posts = []" class="btn btn btn-danger">Reset</button>
+      }
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <button class="btn btn-secondary mb-3" (click)="callWithSignals()">
+            Call API (Signals)
+          </button>
+          <ul class="list-unstyled">
+            @for (post of signalPosts(); track post) {
+              <li>{{ post.name }}</li>
+            }
+          </ul>
+        </div>
+      </div>
+      @if (signalPosts().length !== 0) {
+        <button (click)="signalPosts.set([])" class="btn btn btn-danger">
+          Reset
+        </button>
+      }
+    </div>
+  </div>
+
+  <app-change-detection-demo
+    [displayNumber]="displayNumber"
+    (updateParentValue)="updateParentValue()"
+  ></app-change-detection-demo>
+
+  <router-outlet></router-outlet>
+</div>

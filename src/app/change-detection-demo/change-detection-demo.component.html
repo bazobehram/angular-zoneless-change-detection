@@ -1,0 +1,132 @@
+<div class="card mb-4">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <app-default [parentValue]="displayNumber"></app-default>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <app-on-push [parentValue]="displayNumber"></app-on-push>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <button class="btn btn-primary" (click)="updateParentValue.emit()">
+              Update Parent Value
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <div class="card text-center shadow-sm border-primary">
+          <div class="card-body">
+            <h5 class="card-title">1. Microtask vs Macrotask</h5>
+            <p class="card-text">
+              Microtask Value: <span class="value"> {{ microtaskValue }}</span>
+            </p>
+            <p class="card-text">
+              Macrotask Value: <span class="value"> {{ macrotaskValue }}</span>
+            </p>
+            <button class="btn btn-primary" (click)="runMicroVsMacro()">
+              Run Micro vs Macro
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="card text-center shadow-sm border-secondary">
+          <div class="card-body">
+            <h5 class="card-title">2. Manual Changes</h5>
+            <p class="card-text">
+              Manual Value: <span class="value">{{ manualValue }}</span>
+            </p>
+            <button class="btn btn-secondary" (click)="updateManually()">
+              Update Manually
+            </button>
+            <button
+              class="btn btn-secondary"
+              (click)="updateManuallyWithDetection()"
+            >
+              Update with Detection
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="card text-center shadow-sm border-success">
+          <div class="card-body">
+            <h5 class="card-title">3. Async Operations</h5>
+            <p class="card-text">
+              Promise Value: <span class="value">{{ promiseValue }}</span>
+            </p>
+            <p class="card-text">
+              Observable Value: <span class="value">{{ observableValue }}</span>
+            </p>
+            <button class="btn btn-success" (click)="runAsyncOperations()">
+              Run Async Operations
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="card text-center shadow-sm border-danger">
+          <div class="card-body">
+            <h5 class="card-title">4. Component Hierarchy</h5>
+            <p class="card-text">
+              Child Value: <span class="value">{{ parentValue }}</span>
+            </p>
+            <app-child [inputValue]="parentValue"></app-child>
+            <button class="btn btn-danger" (click)="updateChild()">
+              Update Child
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="card text-center shadow-sm border-warning">
+          <div class="card-body">
+            <h5 class="card-title">5. Performance Measurement</h5>
+            <p class="card-text">
+              Last Update Time: <span class="value">{{ lastUpdateTime }}</span>
+            </p>
+            <button class="btn btn-warning" (click)="measurePerformance()">
+              Measure Performance
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="card text-center shadow-sm border-info">
+          <div class="card-body">
+            <h5 class="card-title">6. NgZone Comparison</h5>
+            <p class="card-text">
+              Inside NgZone Value:
+              <span class="value">{{ insideNgZoneValue }}</span>
+            </p>
+            <p class="card-text">
+              Outside NgZone Value:
+              <span class="value">{{ outsideNgZoneValue }} </span>
+            </p>
+            <button class="btn btn-info" (click)="compareNgZone()">
+              Compare NgZone
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
